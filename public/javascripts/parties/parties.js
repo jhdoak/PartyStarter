@@ -2,7 +2,7 @@ angular.module('myApp')
 .component('parties', {
   template: `
     <div class="party-page z-depth-1">
-    <h4 class="party-page-title">ALL OF THE PARTIES EVER CREATED: </h4>
+
 
     <div class="parties" ng-repeat = "party in $ctrl.parties">
 

@@ -1,5 +1,6 @@
 /*** GENERAL STYLING ***/
 
+
 html, body {
   height: 100%;
   margin: 0;
@@ -9,7 +10,7 @@ html, body {
 }
 
 .ui-view-wrapper {
-  margin-bottom: 50px;
+  margin-bottom: 46px;
 }
 
 h5 {
@@ -167,6 +168,7 @@ nav ul li a {
 
 .party-page {
   background-color: rgb(239,233,231);
+  padding-top: 15px;
 }
 
 .newButton {
@@ -191,16 +193,25 @@ nav ul li a {
 #party-show .party-body {
   display: flex;
   flex-direction: row;
-  padding: 0, 20px, 0, 20px;
-  margin: 10px;
+  margin: 0 0 5px;
+  padding-bottom: 10px;
   background-color: rgb(239,233,231);
-
 }
 
 #party-show .party-header {
   background-color: rgb(239,233,231);
-  height: 250px;
-  padding: 20px;
+  padding: 10px 20px 10px;
+}
+
+#party-show .party-header h3 {
+  margin: 0;
+}
+
+#party-show .party-header .party-description {
+  margin-bottom: 0;
+}
+
+#party-show p {
   font-size: 15px;
 }
 
@@ -215,10 +226,6 @@ nav ul li a {
   padding-left: 20px;
 }
 
-#party-show .party-location {
-  height: 450px;
-}
-
 #party-show .food-list {
   height: auto;
   width: 70%;
@@ -226,7 +233,7 @@ nav ul li a {
 
 #party-show .party-people {
   background-color: rgb(239,233,231);
-  width: 40%;
+  width: 100%;
   font-size: 20px;
 }
 
@@ -237,6 +244,20 @@ nav ul li a {
 
 #party-show .party-header .icon-span {
   padding: 9px 5px;
+}
+
+#party-show .detail-section .icon {
+  width: 40px;
+  float: left;
+}
+
+#party-show .detail-section .details {
+  margin-left: 40px;
+}
+
+#party-show .detail-section i {
+  padding: 0 10px;
+  vertical-align: top;
 }
 
 .showButton {

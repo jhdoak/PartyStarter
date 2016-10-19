@@ -52,7 +52,7 @@ router.get('/logout', function(req, res, next) {
 });
 
 router.get('/me', function(req, res, next) {
-  res.json( { email: req.user ? req.user.local.email : '' } );
+  res.json( { email: req.user ? req.user.local.email : ''} );
 });
 
 module.exports = router;

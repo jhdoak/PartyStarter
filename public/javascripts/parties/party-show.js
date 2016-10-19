@@ -15,37 +15,55 @@ angular.module('myApp')
         </div>
         <h3>{{ $ctrl.party.name }}</h3>
         <p><b>Organized by: </b>{{ $ctrl.party.organizer.username }}</p>
-        <p><b>Date: </b>{{ $ctrl.party.date }}</p>
-        <p><b>Description: </b>{{ $ctrl.party.description }}</p>
+        <p class="party-description"><b>Description: </b>{{ $ctrl.party.description }}</p>
       </div>
 
       <div class="party-body row red-text accent-2">
         <div class="party-info column">
-          <i class="fa fa-clock-o fa-2x" aria-hidden="true"></i><p><b>Time: </b>{{ $ctrl.party.time.start }} to {{ $ctrl.party.time.end }}</p>
-            <div class="party-location">
-              <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
-              <p><b>Location: </b>{{ $ctrl.party.location.address }}</p>
-              <div id="showmap"></div>
+          <div class="party-time detail-section">
+            <div class="icon">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
             </div>
+            <div class="details">
+              <p><b>Date: </b>{{ $ctrl.party.date }}</p>
+              <p><b>Time: </b>{{ $ctrl.party.time.start }} to {{ $ctrl.party.time.end }}</p>
+            </div>
+          </div>
+          <div class="party-location detail-section">
+            <div class="icon">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+            </div>
+            <div class="details">
+              <p><b>Location: </b>{{ $ctrl.party.location.address }}</p>
+            </div>
+            <div id="showmap"></div>
+          </div>
         </div>
 
-        <div class="party-people column">
-          <i class="fa fa-user fa-2x" aria-hidden="true"></i>
-
-          <p><b>Created: </b>{{ $ctrl.party.updatedAt | date : "medium" }}</p>
-          <p><b>Last Updated: </b>{{ $ctrl.party.createdAt | date : "medium" }}</p>
-          <p><b>Guest Attending: </b> {{ $ctrl.party.usersAttending }}</p>
+        <div>
+          <div class="party-people column detail-section">
+            <div class="icon">
+              <i class="fa fa-user" aria-hidden="true"></i>
+            </div>
+            <div class="details">
+              <p><b>Planned On: </b>{{ $ctrl.party.updatedAt | date : "medium" }}</p>
+              <p><b>Updated On: </b>{{ $ctrl.party.createdAt | date : "medium" }}</p>
+              <p><b>Guests Attending: </b> {{ $ctrl.party.usersAttending }}</p>
+            </div>
+          </div>
         </div>
       </div>
 
     <a ui-sref="parties" class="showButton btn btn yellow lighten-2 black-text">Back</a>
-    <a ng-click="$ctrl.edit(party)" class="showButton btn yellow lighten-2 black-text">Edit</a>
+    <a ng-if="$ctrl.Auth.getCurrentUserSync().email==$ctrl.party.organizer.local.email" ng-click="$ctrl.edit(party)" class="showButton btn yellow lighten-2 black-text">Edit</a>
     </div>
 
 
   `,
-  controller: function(partyService, $state, $stateParams) {
+  controller: function(partyService, $state, $stateParams, Auth) {
     this.party = null;
+
+    this.Auth = Auth;
 
     this.edit = function() {
       $state.go('party-edit', { id: this.party._id });
@@ -55,6 +73,8 @@ angular.module('myApp')
     .then( res => {
       this.party = res.data;
       this.party.date = moment(this.party.date).format('MM-DD-YYYY');
+      console.log(this.party.organizer.local.email);
+      console.log(Auth.getCurrentUserSync().email);
 
       var mapOptions = {
         zoom: 12,
